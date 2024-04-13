@@ -1,3 +1,2 @@
 # NewsProject
-# Description 
-CRUD Operations With BazorWebAssembly
+## Description CRUD Operations With BazorWebAssembly
