@@ -1,0 +1,42 @@
+﻿@page "/addnew"
+<PageTitle>Add New</PageTitle>
+
+
+
+<div class="card">
+    <div class="card-header"><h3>Add New</h3></div>
+
+    @if (_categories != null)
+    {
+        <div class="card-body">
+            <EditForm Model="NewsListDto" OnValidSubmit="Create">
+                <DataAnnotationsValidator />
+                <div class="form-group row mb-md-2">
+                    <div class="col-6 mr-2"><InputText class="form-control" placeholder="Enter Title" id="Title" @bind-Value="NewsListDto.Title"></InputText></div>
+                    <div class="col-6 mr-2"><InputText class="form-control" placeholder="Enter SubTitle" id="SubTiltle" @bind-Value="NewsListDto.SubTiltle"></InputText></div>
+                </div>
+
+                <div class="form-group row mb-md-2">
+                    <div class="col-6 mr-2"><InputText class="form-control" placeholder="Enter Summary" id="ShortDetails" @bind-Value="NewsListDto.ShortDetails"></InputText></div>
+                    <div class="col-6 mr-2">
+                        <InputSelect id="categoryId" @bind-Value="NewsListDto.categoryId" class="form-control">
+                            <option value=0>-- Select Category --</option>
+                            @foreach (var options in _categories)
+                            {
+                                <option value="@options.Id">@options.CategoryName</option>
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <div class="col-6 mr-2"><InputFile OnChange="@OnFileSelection"></InputFile></div>
+                    <img src="@imgUrl" style="width:150px" />
+                </div>
+                <div class="form-group row mb-md-2">
+                    <div class="col-12 mr-2"><InputTextArea class="form-control" id="Details" @bind-Value="NewsListDto.Details"></InputTextArea></div>
+                </div>
+                <button type="submit" class="btn btn-success mt-2 float-end">Save</button>
+            </EditForm>
+        </div>
+    }
+</div>

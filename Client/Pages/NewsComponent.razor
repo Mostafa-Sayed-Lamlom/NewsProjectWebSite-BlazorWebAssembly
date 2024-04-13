@@ -1,0 +1,53 @@
+﻿@page "/newsLists"
+<PageTitle>News</PageTitle>
+
+<div class="card">
+    <div class="card-header">
+        <h3>News List<a href="addnew" class="btn btn-primary float-end">Add new</a></h3>
+        <div class="row">
+            <div class="col-md-6">
+                <EditForm Model="catId">
+                    <InputSelect id="catId" ValueChanged="@((int value) => GetNewsByCatId(value))" ValueExpression="@(() => catId)" Value="@catId" class="form-control">
+                        <option value=0>All Categories</option>
+                        @foreach (var cat in _categories)
+                        {
+                            <option value="@cat.Id">@cat.CategoryName</option>
+                        }
+                    </InputSelect>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+@if (_NewsList != null)
+{
+    @foreach (var Item in _NewsList)
+    {
+        <div class="card mb-2">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>@Item.Title</h3>
+                        <h5>@Item.SubTiltle</h5>
+                    </div>
+                    <div class="col-md-3 float-end my-auto">
+                        <h5>@Item.NewDate</h5>
+                        <h5>@Item.category.CategoryName</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2 m-3">
+                        <img src="NewsImges/@Item.ImgPath" alt="No Image" style="width:120px;" />
+                    </div>
+                    <div class="col-md-9 my-auto">
+                        <h3>@Item.ShortDetails<a href="NewDetails/@Item.Id">Read More</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}

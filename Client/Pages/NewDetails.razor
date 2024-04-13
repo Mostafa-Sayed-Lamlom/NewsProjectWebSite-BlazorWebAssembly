@@ -1,0 +1,54 @@
+﻿@page "/NewDetails/{id}"
+
+@if (newsList != null && newsList.category != null && _comments != null)
+{
+    <div class="card">
+        <div class=card-header>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>@newsList.Title</h3>
+                    <h5>@newsList.SubTiltle</h5>
+                </div>
+                <div class="col-md-3 float-end my-auto">
+                    <a href="" class="btn btn-primary">Update</a>
+                    <a href="" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class=card-body>
+            <div class="alert-primary">
+                <h5>@newsList.NewDate</h5>
+                <h5>@newsList.category.CategoryName</h5>
+            </div>
+            <img src="NewsImges/@newsList.ImgPath" alt="No Image" style="width:200px;" />
+            <h4>@newsList.ShortDetails</h4>
+            <h5>@newsList.Details</h5>
+        </div>
+    </div>
+    <br />
+    <h3>Add Comment</h3>
+    <EditForm Model="newComment" OnValidSubmit="AddComment" class="card card-body bg-light mt-5">
+        <div class="form-group row">
+            <div class="col-md-12">
+                <InputText id="CommentDetails" class="form-control" @bind-Value="newComment.CommentDetails" />
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-success">Add Comment</button>
+            </div>
+        </div>
+    </EditForm>
+
+    <h3>Comments</h3>
+    @if (_comments.Count > 0)
+    {
+        @foreach (var comment in _comments)
+        {
+            <div class="card">
+                <div class="card-header">@comment.CommentDate</div>
+                <div class="card-body">@comment.CommentDetails</div>
+            </div>
+        }
+    }
+}
